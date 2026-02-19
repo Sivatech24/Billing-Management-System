@@ -13,5 +13,18 @@ namespace Billing_Management_System
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            InitializeComponent();
+            try
+            {
+                BillingApp.DatabaseHelper.InitializeDatabase();
+            }
+            catch (Exception ex)
+            {
+                // write to console to help debugging connection issues in development
+                System.Diagnostics.Debug.WriteLine("Database initialization failed: " + ex.Message);
+            }
+        }
     }
 }
