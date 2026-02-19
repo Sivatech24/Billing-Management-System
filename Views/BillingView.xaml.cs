@@ -98,8 +98,8 @@ namespace Billing_Management_System.Views
 
                     try
                     {
-                        // Insert into Bills
-                        string billQuery = "INSERT INTO Bills (CustomerName, Amount, BillDate) VALUES (@CustomerName, @Amount, @BillDate)";
+                        // Insert into bills (use lowercase table name to match DB)
+                        string billQuery = "INSERT INTO bills (CustomerName, Amount, BillDate) VALUES (@CustomerName, @Amount, @BillDate)";
                         long billId;
 
                         using (var cmd = new MySqlCommand(billQuery, con, transaction))
@@ -112,10 +112,10 @@ namespace Billing_Management_System.Views
                             billId = cmd.LastInsertedId;
                         }
 
-                        // Insert Bill Items
+                        // Insert billitems (use lowercase table name)
                         foreach (var item in _items)
                         {
-                            string itemQuery = @"INSERT INTO BillItems 
+                            string itemQuery = @"INSERT INTO billitems 
                                 (BillId, ItemName, Price, Qty, Cgst, Sgst, Total)
                                 VALUES (@BillId, @ItemName, @Price, @Qty, @Cgst, @Sgst, @Total)";
 
@@ -166,31 +166,56 @@ namespace Billing_Management_System.Views
                 using (var con = Billing_Management_System.DatabaseHelper.GetConnection())
                 {
                     con.Open();
-                    string query = "SELECT * FROM Bills ORDER BY BillDate DESC";
+                    string query = "SELECT * FROM bills ORDER BY BillDate DESC";
 
                     using (var cmd = new MySqlCommand(query, con))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            var id = reader.GetInt64("Id");
+
+                            // handle nullable CustomerName and BillDate safely
+                            var customer = reader["CustomerName"] == DBNull.Value ? string.Empty : reader["CustomerName"].ToString();
+                            var amount = reader["Amount"] == DBNull.Value ? 0m : reader.GetDecimal("Amount");
+                            DateTime billDate = DateTime.MinValue;
+                            if (reader["BillDate"] != DBNull.Value)
+                            {
+                                billDate = reader.GetDateTime("BillDate");
+                            }
+
                             bills.Add(new Bill
                             {
-                                Id = reader.GetInt64("Id"),
-                                CustomerName = reader.GetString("CustomerName"),
-                                Amount = reader.GetDecimal("Amount"),
-                                BillDate = reader.GetDateTime("BillDate")
+                                Id = id,
+                                CustomerName = customer,
+                                Amount = amount,
+                                BillDate = billDate
                             });
                         }
                     }
                 }
 
                 dgBills.ItemsSource = bills;
+
+                // if there are bills, auto-select the first one so Print can work immediately
+                if (bills.Count > 0)
+                {
+                    dgBills.SelectedIndex = 0;
+                }
+                else
+                {
+                    // no bills found - notify the user so they know to create one
+                    System.Diagnostics.Debug.WriteLine("No bills found in database.");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading bills: " + ex.Message);
             }
         }
+
+        // Expose the currently selected bill to external callers (MainWindow)
+        public Bill SelectedBill => dgBills.SelectedItem as Bill;
 
         private void ClearItems_Click(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Billing_Management_System.Models;
+using Billing_Management_System.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Billing_Management_System.Views;
 
 namespace Billing_Management_System
 {
@@ -56,7 +57,22 @@ namespace Billing_Management_System
 
         private void Print_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new PrintView());
+            // Get the currently displayed BillingView from the frame and use its selected bill
+            var billingPage = MainFrame.Content as BillingView;
+            if (billingPage == null)
+            {
+                MessageBox.Show("Open 'Make Bill' and select a bill before printing.");
+                return;
+            }
+
+            var selectedBill = billingPage.SelectedBill;
+            if (selectedBill == null)
+            {
+                MessageBox.Show("Please select a bill from the list to print.");
+                return;
+            }
+
+            MainFrame.Navigate(new PrintView(selectedBill.Id));
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)
