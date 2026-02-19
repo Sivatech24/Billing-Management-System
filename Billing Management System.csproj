@@ -166,5 +166,8 @@
   <ItemGroup>
     <Resource Include="db_connect_log.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
