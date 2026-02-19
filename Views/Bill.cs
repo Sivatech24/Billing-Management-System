@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Billing_Management_System.Views
+namespace Billing_Management_System.Models
 {
     //internal class Bill
     //{
