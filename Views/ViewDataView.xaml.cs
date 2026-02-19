@@ -91,5 +91,38 @@ namespace Billing_Management_System.Views
                 LoadTableData(cmbTables.SelectedItem.ToString());
             }
         }
+
+        // ================= EDIT SELECTED RECORD =================
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbTables.SelectedItem == null)
+            {
+                MessageBox.Show("Select a table first.");
+                return;
+            }
+
+            var table = cmbTables.SelectedItem.ToString();
+            if (table.ToLower() != "bills")
+            {
+                MessageBox.Show("Editing is only supported for the 'bills' table.");
+                return;
+            }
+
+            if (dgData.SelectedItem == null)
+            {
+                MessageBox.Show("Select a bill row to edit.");
+                return;
+            }
+
+            var row = (System.Data.DataRowView)dgData.SelectedItem;
+            long id = Convert.ToInt64(row["Id"]);
+
+            // navigate MainFrame to AddDataView for editing
+            var main = Application.Current.MainWindow as MainWindow;
+            if (main != null)
+            {
+                main.MainFrame.Navigate(new AddDataView(id));
+            }
+        }
     }
 }

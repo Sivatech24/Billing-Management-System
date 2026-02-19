@@ -5,7 +5,63 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:Billing_Management_System.Views"
       mc:Ignorable="d">
-    <Grid>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Text="Edit / Create Bill" FontSize="18" FontWeight="Bold" />
+
+            <TextBlock Text="Customer Name" Margin="0,10,0,0" />
+            <TextBox x:Name="txtCustomerName" Height="30" />
+
+            <TextBlock Text="Item Name" Margin="0,10,0,0" />
+            <TextBox x:Name="txtItemName" Height="30" />
+
+            <WrapPanel Margin="0,10,0,0">
+                <StackPanel Width="120">
+                    <TextBlock Text="Price" />
+                    <TextBox x:Name="txtPrice" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="Qty" />
+                    <TextBox x:Name="txtQty" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="CGST%" />
+                    <TextBox x:Name="txtCgst" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="SGST%" />
+                    <TextBox x:Name="txtSgst" Height="30" />
+                </StackPanel>
+            </WrapPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Add Item" Width="100" Click="AddItem_Click" />
+                <Button Content="Save" Width="100" Margin="10,0,0,0" Click="Save_Click" />
+                <Button Content="Clear Items" Width="100" Margin="10,0,0,0" Click="ClearItems_Click" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Subtotal:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBlock x:Name="txtSubtotal" Text="0" VerticalAlignment="Center" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Bill Items" FontSize="16" FontWeight="Bold" />
+            <DataGrid x:Name="dgItems" AutoGenerateColumns="False" Height="420" Margin="0,10,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item" Binding="{Binding ItemName}" Width="*" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="80" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding Qty}" Width="60" />
+                    <DataGridTextColumn Header="CGST%" Binding="{Binding Cgst}" Width="60" />
+                    <DataGridTextColumn Header="SGST%" Binding="{Binding Sgst}" Width="60" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Page>

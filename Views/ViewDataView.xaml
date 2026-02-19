@@ -27,6 +27,7 @@
                     Width="100"
                     Margin="10,0,0,0"
                     Click="Refresh_Click"/>
+            <Button Content="Edit" Width="100" Margin="10,0,0,0" Click="Edit_Click"/>
         </StackPanel>
 
         <!-- DataGrid -->

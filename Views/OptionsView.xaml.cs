@@ -18,5 +18,23 @@ namespace Billing_Management_System.Views
         {
             InitializeComponent();
         }
+
+        private void ViewData_Click(object sender, RoutedEventArgs e)
+        {
+            var main = Application.Current.MainWindow as MainWindow;
+            if (main != null)
+            {
+                main.MainFrame.Navigate(new ViewDataView());
+            }
+        }
+
+        private void EditBill_Click(object sender, RoutedEventArgs e)
+        {
+            var main = Application.Current.MainWindow as MainWindow;
+            if (main != null)
+            {
+                main.MainFrame.Navigate(new AddDataView());
+            }
+        }
     }
 }
