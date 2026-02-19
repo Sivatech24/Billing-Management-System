@@ -36,37 +36,37 @@ namespace Billing_Management_System
 
         private void Bill_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new BillingView();
+            MainFrame.Navigate(new BillingView());
         }
 
         private void Payments_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new PaymentsView();
+            MainFrame.Navigate(new PaymentsView());
         }
 
         private void AddData_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new AddDataView();
+            MainFrame.Navigate(new AddDataView());
         }
 
         private void ViewData_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ViewDataView();
+            MainFrame.Navigate(new ViewDataView());
         }
 
         private void Print_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new PrintView();
+            MainFrame.Navigate(new PrintView());
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new OptionsView();
+            MainFrame.Navigate(new OptionsView());
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new HelpView();
+            MainFrame.Navigate(new HelpView());
         }
     }
 }

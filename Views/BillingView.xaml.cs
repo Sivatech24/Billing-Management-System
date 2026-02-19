@@ -5,12 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Billing_Management_System.Models;
@@ -21,7 +16,7 @@ namespace Billing_Management_System.Views
     /// <summary>
     /// Interaction logic for BillingView.xaml
     /// </summary>
-    public partial class BillingView : Window
+    public partial class BillingView : Page
     {
         private ObservableCollection<BillItem> _items = new ObservableCollection<BillItem>();
 
