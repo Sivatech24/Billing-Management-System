@@ -4,8 +4,79 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:Billing_Management_System.Views"
-      mc:Ignorable="d">
-    <Grid>
+      mc:Ignorable="d"
+      Background="White">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Padding="30" Background="White" BorderBrush="Gray" BorderThickness="1">
+            <StackPanel>
 
-    </Grid>
+                <!-- HEADER -->
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Your Company Name"
+                                   FontSize="22"
+                                   FontWeight="Bold"/>
+                        <TextBlock Text="Street Address"/>
+                        <TextBlock Text="City, State - 600001"/>
+                        <TextBlock Text="Phone: 9876543210"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock Text="INVOICE"
+                                   FontSize="28"
+                                   FontWeight="Bold"/>
+                        <TextBlock x:Name="txtInvoiceNo"/>
+                        <TextBlock x:Name="txtInvoiceDate"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- BILL TO -->
+                <GroupBox Header="Bill To" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock x:Name="txtCustomerName"
+                                   FontSize="16"
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- ITEMS TABLE -->
+                <DataGrid x:Name="dgInvoiceItems"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          Margin="0,0,0,20">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Item" Binding="{Binding ItemName}" Width="*"/>
+                        <DataGridTextColumn Header="Qty" Binding="{Binding Qty}" Width="80"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                        <DataGridTextColumn Header="CGST%" Binding="{Binding Cgst}" Width="80"/>
+                        <DataGridTextColumn Header="SGST%" Binding="{Binding Sgst}" Width="80"/>
+                        <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- TOTALS -->
+                <StackPanel HorizontalAlignment="Right">
+                    <TextBlock x:Name="txtSubtotal"/>
+                    <TextBlock x:Name="txtTax"/>
+                    <TextBlock x:Name="txtGrandTotal"
+                               FontSize="18"
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+                <!-- SIGN -->
+                <StackPanel Margin="0,40,0,0">
+                    <TextBlock Text="Authorized Signature"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
 </Page>
