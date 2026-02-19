@@ -16,7 +16,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Windows;
 
-namespace BillingApp
+namespace Billing_Management_System
 {
     public partial class RegisterWindow : Window
     {
