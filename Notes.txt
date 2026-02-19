@@ -1,3 +1,11 @@
 ﻿the value of the xmal header of the file with name "Billing_Management_System.RegisterWindow"
 
 patched until of the home page
+
+NuGet Packages:
+
+MySql.Data
+PdfSharp-MigraDoc-GDI
+System.Drawing.Common
+Microsoft.Xaml.Behaviors.Wpf (optional)
+
