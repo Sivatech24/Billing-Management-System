@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using MySql.Data.MySqlClient;
-using System;
 using System.Windows;
 
 namespace Billing_Management_System
