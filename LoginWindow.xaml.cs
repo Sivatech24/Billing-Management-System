@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BillingApp
+namespace Billing_Management_System
 {
     public partial class LoginWindow : Window
     {
