@@ -5,8 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Billing_Management_System.Views"
         mc:Ignorable="d"
-        Title="BillingView" Height="450" Width="800">
-    <Grid>
-        
+        Title="BillingView" Height="auto" Width="auto">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Text="Create Bill" FontSize="18" FontWeight="Bold" />
+
+            <TextBlock Text="Customer Name" Margin="0,10,0,0" />
+            <TextBox x:Name="txtCustomerName" Height="30" />
+
+            <TextBlock Text="Item Name" Margin="0,10,0,0" />
+            <TextBox x:Name="txtItemName" Height="30" />
+
+            <WrapPanel Margin="0,10,0,0">
+                <StackPanel Width="120">
+                    <TextBlock Text="Price" />
+                    <TextBox x:Name="txtPrice" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="Qty" />
+                    <TextBox x:Name="txtQty" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="CGST%" />
+                    <TextBox x:Name="txtCgst" Height="30" />
+                </StackPanel>
+                <StackPanel Width="80" Margin="10,0,0,0">
+                    <TextBlock Text="SGST%" />
+                    <TextBox x:Name="txtSgst" Height="30" />
+                </StackPanel>
+            </WrapPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Add Item" Width="100" Click="AddItem_Click" />
+                <Button Content="Save Bill" Width="100" Margin="10,0,0,0" Click="SaveBill_Click" />
+                <Button Content="Clear Items" Width="100" Margin="10,0,0,0" Click="ClearItems_Click" />
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0">
+                <TextBlock Text="Totals" FontWeight="Bold" />
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Subtotal: " Width="100" />
+                    <TextBlock x:Name="txtSubtotal" Text="0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Total CGST: " Width="100" />
+                    <TextBlock x:Name="txtTotalCgst" Text="0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Total SGST: " Width="100" />
+                    <TextBlock x:Name="txtTotalSgst" Text="0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Grand Total: " Width="100" />
+                    <TextBlock x:Name="txtGrandTotal" Text="0" FontWeight="Bold" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Bill Items" FontSize="16" FontWeight="Bold" />
+            <DataGrid x:Name="dgItems" AutoGenerateColumns="False" Height="350" Margin="0,10,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item" Binding="{Binding ItemName}" Width="*" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="80" />
+                    <DataGridTextColumn Header="Qty" Binding="{Binding Qty}" Width="60" />
+                    <DataGridTextColumn Header="CGST%" Binding="{Binding Cgst}" Width="60" />
+                    <DataGridTextColumn Header="SGST%" Binding="{Binding Sgst}" Width="60" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Make Invoices - Day" Width="150" Click="GenerateDay_Click" />
+                <Button Content="Make Invoices - Week" Width="150" Margin="10,0,0,0" Click="GenerateWeek_Click" />
+                <Button Content="Make Invoices - Month" Width="150" Margin="10,0,0,0" Click="GenerateMonth_Click" />
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Existing Bills" FontSize="14" FontWeight="Bold" />
+                    <Button Content="Refresh" Width="80" Margin="10,0,0,0" Click="LoadBills_Click" />
+                </StackPanel>
+
+                <DataGrid x:Name="dgBills" AutoGenerateColumns="False" Height="200" Margin="0,10,0,0" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="60" />
+                        <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="*" />
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100" />
+                        <DataGridTextColumn Header="BillDate" Binding="{Binding BillDate}" Width="160" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
