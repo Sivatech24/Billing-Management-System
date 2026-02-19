@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace BillingApp
+namespace Billing_Management_System
 {
     public static class SecurityHelper
     {

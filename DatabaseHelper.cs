@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace BillingApp
+namespace Billing_Management_System
 {
     public static class DatabaseHelper
     {
