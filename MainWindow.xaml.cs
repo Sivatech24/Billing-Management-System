@@ -26,7 +26,7 @@ namespace Billing_Management_System
             InitializeComponent();
             // Show dashboard on startup
             // defer showing HomeView until component names are available
-            this.Loaded += (s, e) => { MainFrame.Content = new HomeView(); };
+            // this.Loaded += (s, e) => { MainFrame.Content = new HomeView(); };
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
