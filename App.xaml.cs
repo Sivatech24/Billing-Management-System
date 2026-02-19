@@ -18,7 +18,7 @@ namespace Billing_Management_System
             InitializeComponent();
             try
             {
-                BillingApp.DatabaseHelper.InitializeDatabase();
+                Billing_Management_System.DatabaseHelper.InitializeDatabase();
             }
             catch (Exception ex)
             {
