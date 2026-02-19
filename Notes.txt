@@ -1,1 +1,3 @@
 ﻿the value of the xmal header of the file with name "Billing_Management_System.RegisterWindow"
+
+patched until of the home page
