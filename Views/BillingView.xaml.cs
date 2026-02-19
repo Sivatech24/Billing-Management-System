@@ -21,7 +21,7 @@ namespace Billing_Management_System.Views
     /// <summary>
     /// Interaction logic for BillingView.xaml
     /// </summary>
-    public partial class BillingView : UserControl
+    public partial class BillingView : Window
     {
         private ObservableCollection<BillItem> _items = new ObservableCollection<BillItem>();
 
