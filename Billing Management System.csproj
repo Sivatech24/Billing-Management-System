@@ -114,6 +114,7 @@
     <Compile Include="Views\AddDataView.xaml.cs">
       <DependentUpon>AddDataView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Bill.cs" />
     <Compile Include="Views\BillingView.xaml.cs">
       <DependentUpon>BillingView.xaml</DependentUpon>
     </Compile>
