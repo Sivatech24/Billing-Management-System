@@ -111,6 +111,9 @@
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SecurityHelper.cs" />
+    <Compile Include="Views\AddDataView.xaml.cs">
+      <DependentUpon>AddDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BillingView.xaml.cs">
       <DependentUpon>BillingView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
