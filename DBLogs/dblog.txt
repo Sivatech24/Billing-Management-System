@@ -1,0 +1,256 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.45 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE BillingAppDB;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> GO
+ERROR:
+No query specified
+
+mysql> USE BillingAppDB;
+Database changed
+mysql> GO
+ERROR:
+No query specified
+
+mysql> CREATE TABLE Users (
+    ->     Id INT PRIMARY KEY IDENTITY(1,1),
+    ->     FullName NVARCHAR(100) NOT NULL,
+    ->     Username NVARCHAR(50) UNIQUE NOT NULL,
+    ->     PasswordHash NVARCHAR(256) NOT NULL,
+    ->     CreatedDate DATETIME DEFAULT GETDATE()
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+    FullName NVARCHAR(100) NOT NULL,
+    Username NVARCHAR(50) UN' at line 2
+mysql> GO
+ERROR:
+No query specified
+
+mysql> CREATE TABLE Bills (
+    ->     Id INT PRIMARY KEY IDENTITY(1,1),
+    ->     CustomerName NVARCHAR(100),
+    ->     BillDate DATETIME DEFAULT GETDATE(),
+    ->     SubTotal DECIMAL(18,2),
+    ->     CGST DECIMAL(18,2),
+    ->     SGST DECIMAL(18,2),
+    ->     GrandTotal DECIMAL(18,2)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+    CustomerName NVARCHAR(100),
+    BillDate DATETIME DEFAULT GET' at line 2
+mysql> CREATE TABLE Bills (
+    ->     Id INT PRIMARY KEY IDENTITY(1,1),
+    ->     CustomerName NVARCHAR(100),
+    ->     BillDate DATETIME DEFAULT GETDATE(),
+    ->     SubTotal DECIMAL(18,2),
+    ->     CGST DECIMAL(18,2),
+    ->     SGST DECIMAL(18,2),
+    ->     GrandTotal DECIMAL(18,2)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+    CustomerName NVARCHAR(100),
+    BillDate DATETIME DEFAULT GET' at line 2
+mysql> GO
+ERROR:
+No query specified
+
+mysql> CREATE TABLE Users (
+    ->     Id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     FullName VARCHAR(100) NOT NULL,
+    ->     Username VARCHAR(50) NOT NULL UNIQUE,
+    ->     PasswordHash VARCHAR(256) NOT NULL,
+    ->     CreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Bills (
+    ->     Id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     CustomerName VARCHAR(100),
+    ->     BillDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ->     SubTotal DECIMAL(18,2),
+    ->     CGST DECIMAL(18,2),
+    ->     SGST DECIMAL(18,2),
+    ->     GrandTotal DECIMAL(18,2)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE BillItems (
+    ->     Id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     BillId INT,
+    ->     ItemName VARCHAR(100),
+    ->     Price DECIMAL(18,2),
+    ->     Quantity INT,
+    ->     CGSTPercent DECIMAL(5,2),
+    ->     SGSTPercent DECIMAL(5,2),
+    ->     Total DECIMAL(18,2),
+    ->     FOREIGN KEY (BillId) REFERENCES Bills(Id) ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW BillingAppDB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BillingAppDB' at line 1
+mysql> SHOW BillingAppDB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BillingAppDB' at line 1
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| billingappdb       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| simms              |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.04 sec)
+
+mysql> SHOW billingappdb;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'billingappdb' at line 1
+mysql> USE billingappdb;
+Database changed
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_billingappdb |
++------------------------+
+| billitems              |
+| bills                  |
+| users                  |
++------------------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM billitems
+    ->
+    -> ;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM billitems;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM bills;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM users;
++----+----------+----------+------------------------------------------------------------------+---------------------+
+| Id | FullName | Username | PasswordHash                                                     | CreatedDate         |
++----+----------+----------+------------------------------------------------------------------+---------------------+
+|  1 | tech     | tech24   | 483029d526219f816e8e8f6a9de07b422633dba180ffc26faac22862a017519f | 2026-02-17 18:10:43 |
++----+----------+----------+------------------------------------------------------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> DROP TABLE IF EXISTS billitems;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DROP TABLE IF EXISTS bills;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> SET FOREIGN_KEY_CHECKS = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE bills (
+    ->     Id BIGINT NOT NULL AUTO_INCREMENT,
+    ->     CustomerName VARCHAR(255) NULL,
+    ->     Amount DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ->     BillDate DATETIME NULL,
+    ->     PRIMARY KEY (Id)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE billitems (
+    ->     Id BIGINT NOT NULL AUTO_INCREMENT,
+    ->     BillId BIGINT NOT NULL,
+    ->     ItemName VARCHAR(255) NULL,
+    ->     Price DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ->     Qty INT NOT NULL DEFAULT 1,
+    ->     Image VARCHAR(255) NULL,
+    ->     Cgst DECIMAL(7,2) NOT NULL DEFAULT 0,
+    ->     Sgst DECIMAL(7,2) NOT NULL DEFAULT 0,
+    ->     Total DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ->     PRIMARY KEY (Id),
+    ->     INDEX idx_billitems_billid (BillId),
+    ->     CONSTRAINT fk_billitems_bills
+    ->         FOREIGN KEY (BillId)
+    ->         REFERENCES bills(Id)
+    ->         ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE bills;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| Id           | bigint        | NO   | PRI | NULL    | auto_increment |
+| CustomerName | varchar(255)  | YES  |     | NULL    |                |
+| Amount       | decimal(18,2) | NO   |     | 0.00    |                |
+| BillDate     | datetime      | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> DESCRIBE billitems;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| Id       | bigint        | NO   | PRI | NULL    | auto_increment |
+| BillId   | bigint        | NO   | MUL | NULL    |                |
+| ItemName | varchar(255)  | YES  |     | NULL    |                |
+| Price    | decimal(18,2) | NO   |     | 0.00    |                |
+| Qty      | int           | NO   |     | 1       |                |
+| Image    | varchar(255)  | YES  |     | NULL    |                |
+| Cgst     | decimal(7,2)  | NO   |     | 0.00    |                |
+| Sgst     | decimal(7,2)  | NO   |     | 0.00    |                |
+| Total    | decimal(18,2) | NO   |     | 0.00    |                |
++----------+---------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM bills ORDER BY Id DESC LIMIT 5;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM bills ORDER BY Id DESC LIMIT 5;
++----+--------------+---------+---------------------+
+| Id | CustomerName | Amount  | BillDate            |
++----+--------------+---------+---------------------+
+|  1 | tech         | 2000.00 | 2026-02-17 19:08:19 |
++----+--------------+---------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM bills ORDER BY Id DESC LIMIT 5;
++----+--------------+---------+---------------------+
+| Id | CustomerName | Amount  | BillDate            |
++----+--------------+---------+---------------------+
+|  2 | TEST_USER    |  123.45 | 2026-02-17 19:08:40 |
+|  1 | tech         | 2000.00 | 2026-02-17 19:08:19 |
++----+--------------+---------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- invoice items (line items for each invoice)
+mysql> CREATE TABLE IF NOT EXISTS `invoice_items` (
+    ->   `Id` BIGINT NOT NULL AUTO_INCREMENT,
+    ->   `InvoiceId` BIGINT NOT NULL,
+    ->   `ItemName` VARCHAR(255) NULL,
+    ->   `UnitPrice` DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ->   `Qty` INT NOT NULL DEFAULT 1,
+    ->   `Cgst` DECIMAL(7,2) NOT NULL DEFAULT 0,
+    ->   `Sgst` DECIMAL(7,2) NOT NULL DEFAULT 0,
+    ->   `Total` DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ->   PRIMARY KEY (`Id`),
+    ->   INDEX (`InvoiceId`),
+    ->   CONSTRAINT `fk_invoiceitems_invoices` FOREIGN KEY (`InvoiceId`) REFERENCES `invoices`(`Id`) ON DELETE CASCADE
+    -> ) ENGINE=InnoDB;
+Query OK, 0 rows affected (0.02 sec)
+
+

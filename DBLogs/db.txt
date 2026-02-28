@@ -1,0 +1,60 @@
+mysql> CREATE DATABASE IF NOT EXISTS `simms` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE `simms`;
+Database changed
+mysql> CREATE TABLE IF NOT EXISTS `users` (
+    ->   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->   `full_name` VARCHAR(200),
+    ->   `username` VARCHAR(100) NOT NULL UNIQUE,
+    ->   `email` VARCHAR(200),
+    ->   `mobile` VARCHAR(20),
+    ->   `dob` DATE,
+    ->   `address` TEXT,
+    ->   `password_hash` VARCHAR(64) NOT NULL,
+    ->   `role` ENUM('User','Admin') NOT NULL DEFAULT 'User',
+    ->   `failed_login_count` INT NOT NULL DEFAULT 0,
+    ->   `account_status` ENUM('Active','Locked') NOT NULL DEFAULT 'Active',
+    ->   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO `users` (`full_name`, `username`, `email`, `password_hash`, `role`)
+    -> VALUES ('Admin User', 'admin', 'admin@example.com', SHA2('admin123', 256), 'Admin');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> db
+    -> ^C
+mysql>
+
+mysql> db
+    -> ^C
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| simms              |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> SELECT simms FROM *;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*' at line 1
+mysql> SELECT * FROM simms;
+ERROR 1146 (42S02): Table 'simms.simms' doesn't exist
+mysql> SELECT * FROM users;
++----+------------+----------+-------------------+-----------+------------+---------------------+------------------------------------------------------------------+-------+--------------------+----------------+---------------------+
+| id | full_name  | username | email             | mobile    | dob        | address             | password_hash
+                                           | role  | failed_login_count | account_status | created_at          |
++----+------------+----------+-------------------+-----------+------------+---------------------+------------------------------------------------------------------+-------+--------------------+----------------+---------------------+
+|  1 | Admin User | admin    | admin@example.com | NULL      | NULL       | NULL                | 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9 | Admin |                  0 | Active         | 2026-01-30 11:49:10 |
+|  2 | tech       | tech24   | tech@gmail.com    | 456465464 | 2000-08-20 | Los Angels,America. | 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4 | User  |                  0 | Active         | 2026-01-30 12:13:52 |
++----+------------+----------+-------------------+-----------+------------+---------------------+------------------------------------------------------------------+-------+--------------------+----------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>
